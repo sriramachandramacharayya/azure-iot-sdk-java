@@ -18,6 +18,7 @@
         <module>device-twin-sample</module>
         <module>device-method-sample</module>
         <module>job-client-sample</module>
+        <module>device-deletion-sample</module>
     </modules>
     <dependencies>
         <dependency>
