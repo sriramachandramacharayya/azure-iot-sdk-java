@@ -64,7 +64,7 @@ public class DeviceTwinCommon extends IntegrationTest
     protected static final Integer PAGE_SIZE = 2;
 
     protected static String iotHubConnectionString = "";
-    protected static final int INTERTEST_GUARDIAN_DELAY_MILLISECONDS = 2000;
+    protected static final int INTERTEST_GUARDIAN_DELAY_MILLISECONDS = 0;
 
     // Constants used in for Testing
     protected static final String PROPERTY_KEY = "Key";

@@ -45,7 +45,10 @@ public class DesiredPropertiesTests extends DeviceTwinCommon
     @Before
     public void setUpNewDeviceAndModule() throws IOException, IotHubException, URISyntaxException, InterruptedException, ModuleClientException
     {
+        long startTime = System.currentTimeMillis();
         super.setUpNewDeviceAndModule();
+        System.out.println("Time taken to setUpNewDeviceAndModule " + ((System.currentTimeMillis() - startTime) / 1000.0));
+
     }
 
     @Test

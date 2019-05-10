@@ -52,7 +52,7 @@ public class DeviceMethodCommon extends IntegrationTest
     protected static final String PAYLOAD_STRING = "This is a valid payload";
 
     protected static final int NUMBER_INVOKES_PARALLEL = 10;
-    protected static final int INTERTEST_GUARDIAN_DELAY_MILLISECONDS = 2000;
+    protected static final int INTERTEST_GUARDIAN_DELAY_MILLISECONDS = 0;
     // How much to wait until a message makes it to the server, in milliseconds
     protected static final Integer SEND_TIMEOUT_MILLISECONDS = 60000;
 
@@ -240,7 +240,11 @@ public class DeviceMethodCommon extends IntegrationTest
 
     public void cleanToStart() throws Exception
     {
+        long startTime = System.currentTimeMillis();
         testInstance.setup();
+        long time1 = System.currentTimeMillis();
+        System.out.println("Time taken to testInstance.setup " + ((time1 - startTime) / 1000.0));
+
         actualStatusUpdates = new ArrayList<Pair<IotHubConnectionStatus, Throwable>>();
         setConnectionStatusCallBack(actualStatusUpdates);
 
@@ -257,12 +261,25 @@ public class DeviceMethodCommon extends IntegrationTest
             e.printStackTrace();
         }
 
+        long time2 = System.currentTimeMillis();
+        System.out.println("Time taken to stop " + ((time2 - time1) / 1000.0));
+
         this.testInstance.deviceTestManager.clearDevice();
+
+        long time3 = System.currentTimeMillis();
+        System.out.println("Time taken to clear device " + ((time3 - time2) / 1000.0));
 
         try
         {
             this.testInstance.deviceTestManager.start(true, false);
+
+            long time4 = System.currentTimeMillis();
+            System.out.println("Time taken to start device " + ((time4 - time3) / 1000.0));
+
             IotHubServicesCommon.confirmOpenStabilized(actualStatusUpdates, 120000, this.testInstance.deviceTestManager.client);
+
+            long time5 = System.currentTimeMillis();
+            System.out.println("Time taken to confirm open stabilized " + ((time5 - time4) / 1000.0));
         }
         catch (IOException | InterruptedException e)
         {
@@ -377,6 +394,7 @@ public class DeviceMethodCommon extends IntegrationTest
     protected void invokeMethodSucceed() throws Exception
     {
         // Arrange
+        long startTime = System.currentTimeMillis();
         DeviceTestManager deviceTestManger = this.testInstance.deviceTestManager;
 
         // Act
@@ -390,13 +408,20 @@ public class DeviceMethodCommon extends IntegrationTest
             result = methodServiceClient.invoke(testInstance.identity.getDeviceId(), DeviceEmulator.METHOD_LOOPBACK, RESPONSE_TIMEOUT, CONNECTION_TIMEOUT, PAYLOAD_STRING);
         }
 
+        long time2 = System.currentTimeMillis();
+        System.out.println("Time taken to invoke method " + ((time2 - startTime) / 1000.0));
+
         deviceTestManger.waitIotHub(1, 10);
+
+        long time3 = System.currentTimeMillis();
+        System.out.println("Time taken to receive invoked method " + ((time3 - time2) / 1000.0));
 
         // Assert
         assertNotNull(result);
         assertEquals((long)DeviceEmulator.METHOD_SUCCESS, (long)result.getStatus());
         assertEquals(DeviceEmulator.METHOD_LOOPBACK + ":" + PAYLOAD_STRING, result.getPayload());
         Assert.assertEquals(0, deviceTestManger.getStatusError());
+        System.out.println("Time taken to assert " + ((System.currentTimeMillis() - time3) / 1000.0));
     }
 
     protected String getModuleConnectionString(Module module) throws IotHubException, IOException

@@ -25,7 +25,6 @@ public class DeviceTestManager
 
     /* deviceEmulator is the device definition on the device `End`. */
     private DeviceEmulator deviceEmulator;
-    private Thread deviceThread;
 
     public DeviceTestManager(InternalClient client)
             throws IOException, URISyntaxException, InterruptedException
@@ -34,9 +33,6 @@ public class DeviceTestManager
 
         /* Create a emulator for the device client, and connect it to the IoTHub */
         deviceEmulator = new DeviceEmulator(client);
-
-        deviceThread = new Thread(deviceEmulator);
-        deviceThread.start();
     }
 
     public void waitIotHub(int numberOfEvents, long timeoutInSeconds) throws InterruptedException, IOException
@@ -80,17 +76,11 @@ public class DeviceTestManager
     public void stop() throws IOException, InterruptedException
     {
         deviceEmulator.stop();
-        int stopDeviceTimeoutInMilliseconds = STOP_DEVICE_TIMEOUT_IN_MILLISECONDS;
-        deviceThread.join(stopDeviceTimeoutInMilliseconds);
     }
 
     public void restartDevice(String connectionString, IotHubClientProtocol protocol, String publicCert, String privateKey) throws InterruptedException, IOException, URISyntaxException, ModuleClientException
     {
-        if(deviceThread.getState() == Thread.State.RUNNABLE)
-        {
-            deviceEmulator.stop();
-        }
-        deviceThread.join(STOP_DEVICE_TIMEOUT_IN_MILLISECONDS);
+        deviceEmulator.stop();
 
         if (this.client instanceof DeviceClient)
         {
@@ -125,12 +115,6 @@ public class DeviceTestManager
 
         /* Enable DeviceTwin on the device client using the callbacks from the DeviceEmulator */
         deviceEmulator.enableDeviceTwin();
-
-        deviceThread = new Thread(deviceEmulator);
-        deviceThread.start();
-
-        /* Wait until the device complete the connection with the IoTHub. */
-        //waitIotHub(1, OPEN_CONNECTION_TIMEOUT_IN_SECONDS);
     }
 
     public int getStatusOk()
