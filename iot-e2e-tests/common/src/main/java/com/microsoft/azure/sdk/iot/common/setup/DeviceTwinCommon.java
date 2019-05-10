@@ -218,9 +218,10 @@ public class DeviceTwinCommon extends IntegrationTest
             devicesUnderTest[i].sCModuleForRegistryManager = com.microsoft.azure.sdk.iot.service.Module.createFromId(id, "module", null);
             devicesUnderTest[i].sCDeviceForRegistryManager = Tools.addDeviceWithRetry(registryManager, devicesUnderTest[i].sCDeviceForRegistryManager);
             devicesUnderTest[i].sCModuleForRegistryManager = Tools.addModuleWithRetry(registryManager, devicesUnderTest[i].sCModuleForRegistryManager);
-            Thread.sleep(2000);
             setUpTwin(devicesUnderTest[i]);
         }
+
+        Thread.sleep(2000);
     }
 
     protected void removeMultipleDevices(int numberOfDevices) throws IOException, IotHubException, InterruptedException
