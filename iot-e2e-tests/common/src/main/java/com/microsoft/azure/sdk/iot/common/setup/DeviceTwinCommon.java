@@ -492,7 +492,7 @@ public class DeviceTwinCommon extends IntegrationTest
         // Check status periodically for success or until timeout
         long startTime = System.currentTimeMillis();
         long timeElapsed;
-        while (expectedReportedPropCount != actualCount)
+        while (expectedReportedPropCount != actualCount) //This is the problem here. Starts off with 1 extra property from earlier call. Need to wipe it out
         {
             Thread.sleep(PERIODIC_WAIT_TIME_FOR_VERIFICATION);
             timeElapsed = System.currentTimeMillis() - startTime;
