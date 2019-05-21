@@ -383,6 +383,16 @@ public class TwinState extends RegisterManager
         return new TwinState(null, result.getDesired(), result.getReported());
     }
 
+    public String getConnectionState()
+    {
+        if (this.connectionState == null)
+        {
+            return null;
+        }
+
+        return this.connectionState.toString();
+    }
+
     /**
      * Empty constructor
      *
