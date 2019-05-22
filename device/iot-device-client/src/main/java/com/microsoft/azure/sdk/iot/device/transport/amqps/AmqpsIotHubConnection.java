@@ -1229,20 +1229,34 @@ public final class AmqpsIotHubConnection extends BaseHandler implements IotHubTr
         String error = "";
         String errorDescription = "";
 
-        String senderError = event.getSender() != null && event.getSender().getRemoteCondition() != null && event.getSender().getRemoteCondition().getCondition() != null ? event.getSender().getRemoteCondition().getCondition().toString() : "";
-        String receiverError = event.getReceiver() != null && event.getReceiver().getRemoteCondition() != null && event.getReceiver().getRemoteCondition().getCondition() != null ? event.getReceiver().getRemoteCondition().getCondition().toString() : "";
-        String sessionError = event.getSession() != null && event.getSession().getRemoteCondition() != null && event.getSession().getRemoteCondition().getCondition() != null ? event.getSession().getRemoteCondition().getCondition().toString() : "";
-        String connectionError = event.getConnection() != null && event.getConnection().getRemoteCondition() != null && event.getConnection().getRemoteCondition().getCondition() != null ? event.getConnection().getRemoteCondition().getCondition().toString() : "";
-        String linkError = event.getLink() != null && event.getLink().getRemoteCondition() != null && event.getLink().getRemoteCondition().getCondition() != null ? event.getLink().getRemoteCondition().getCondition().toString() : "";
-        String transportError = event.getTransport() != null && event.getTransport().getRemoteCondition() != null && event.getTransport().getRemoteCondition().getCondition() != null ? event.getTransport().getRemoteCondition().getCondition().toString() : "";
+        String senderErrorRemote = event.getSender() != null && event.getSender().getRemoteCondition() != null && event.getSender().getRemoteCondition().getCondition() != null ? event.getSender().getRemoteCondition().getCondition().toString() : "";
+        String receiverErrorRemote = event.getReceiver() != null && event.getReceiver().getRemoteCondition() != null && event.getReceiver().getRemoteCondition().getCondition() != null ? event.getReceiver().getRemoteCondition().getCondition().toString() : "";
+        String sessionErrorRemote = event.getSession() != null && event.getSession().getRemoteCondition() != null && event.getSession().getRemoteCondition().getCondition() != null ? event.getSession().getRemoteCondition().getCondition().toString() : "";
+        String connectionErrorRemote = event.getConnection() != null && event.getConnection().getRemoteCondition() != null && event.getConnection().getRemoteCondition().getCondition() != null ? event.getConnection().getRemoteCondition().getCondition().toString() : "";
+        String linkErrorRemote = event.getLink() != null && event.getLink().getRemoteCondition() != null && event.getLink().getRemoteCondition().getCondition() != null ? event.getLink().getRemoteCondition().getCondition().toString() : "";
+        String transportErrorRemote = event.getTransport() != null && event.getTransport().getRemoteCondition() != null && event.getTransport().getRemoteCondition().getCondition() != null ? event.getTransport().getRemoteCondition().getCondition().toString() : "";
 
-        String senderErrorDescription = event.getSender() != null && event.getSender().getRemoteCondition() != null && event.getSender().getRemoteCondition().getDescription() != null ? event.getSender().getRemoteCondition().getDescription() : "";
-        String receiverErrorDescription = event.getReceiver() != null && event.getReceiver().getRemoteCondition() != null && event.getReceiver().getRemoteCondition().getDescription() != null ? event.getReceiver().getRemoteCondition().getDescription() : "";
-        String sessionErrorDescription = event.getSession() != null && event.getSession().getRemoteCondition() != null && event.getSession().getRemoteCondition().getDescription() != null ? event.getSession().getRemoteCondition().getDescription() : "";
-        String connectionErrorDescription = event.getConnection() != null && event.getConnection().getRemoteCondition() != null && event.getConnection().getRemoteCondition().getDescription() != null ? event.getConnection().getRemoteCondition().getDescription() : "";
-        String linkErrorDescription = event.getLink() != null && event.getLink().getRemoteCondition() != null && event.getLink().getRemoteCondition().getDescription() != null ? event.getLink().getRemoteCondition().getDescription() : "";
-        String transportErrorDescription = event.getTransport() != null && event.getTransport().getRemoteCondition() != null && event.getTransport().getRemoteCondition().getDescription() != null ? event.getTransport().getRemoteCondition().getDescription() : "";
+        String senderErrorRemoteDescription = event.getSender() != null && event.getSender().getRemoteCondition() != null && event.getSender().getRemoteCondition().getDescription() != null ? event.getSender().getRemoteCondition().getDescription() : "";
+        String receiverErrorRemoteDescription = event.getReceiver() != null && event.getReceiver().getRemoteCondition() != null && event.getReceiver().getRemoteCondition().getDescription() != null ? event.getReceiver().getRemoteCondition().getDescription() : "";
+        String sessionErrorRemoteDescription = event.getSession() != null && event.getSession().getRemoteCondition() != null && event.getSession().getRemoteCondition().getDescription() != null ? event.getSession().getRemoteCondition().getDescription() : "";
+        String connectionErrorRemoteDescription = event.getConnection() != null && event.getConnection().getRemoteCondition() != null && event.getConnection().getRemoteCondition().getDescription() != null ? event.getConnection().getRemoteCondition().getDescription() : "";
+        String linkErrorRemoteDescription = event.getLink() != null && event.getLink().getRemoteCondition() != null && event.getLink().getRemoteCondition().getDescription() != null ? event.getLink().getRemoteCondition().getDescription() : "";
+        String transportErrorRemoteDescription = event.getTransport() != null && event.getTransport().getRemoteCondition() != null && event.getTransport().getRemoteCondition().getDescription() != null ? event.getTransport().getRemoteCondition().getDescription() : "";
 
+        String senderError = event.getSender() != null && event.getSender().getCondition() != null && event.getSender().getCondition().getCondition() != null ? event.getSender().getCondition().getCondition().toString() : "";
+        String receiverError = event.getReceiver() != null && event.getReceiver().getCondition() != null && event.getReceiver().getCondition().getCondition() != null ? event.getReceiver().getCondition().getCondition().toString() : "";
+        String sessionError = event.getSession() != null && event.getSession().getCondition() != null && event.getSession().getCondition().getCondition() != null ? event.getSession().getCondition().getCondition().toString() : "";
+        String connectionError = event.getConnection() != null && event.getConnection().getCondition() != null && event.getConnection().getCondition().getCondition() != null ? event.getConnection().getCondition().getCondition().toString() : "";
+        String linkError = event.getLink() != null && event.getLink().getCondition() != null && event.getLink().getCondition().getCondition() != null ? event.getLink().getCondition().getCondition().toString() : "";
+        String transportError = event.getTransport() != null && event.getTransport().getCondition() != null && event.getTransport().getCondition().getCondition() != null ? event.getTransport().getCondition().getCondition().toString() : "";
+
+        String senderErrorDescription = event.getSender() != null && event.getSender().getCondition() != null && event.getSender().getCondition().getDescription() != null ? event.getSender().getCondition().getDescription() : "";
+        String receiverErrorDescription = event.getReceiver() != null && event.getReceiver().getCondition() != null && event.getReceiver().getCondition().getDescription() != null ? event.getReceiver().getCondition().getDescription() : "";
+        String sessionErrorDescription = event.getSession() != null && event.getSession().getCondition() != null && event.getSession().getCondition().getDescription() != null ? event.getSession().getCondition().getDescription() : "";
+        String connectionErrorDescription = event.getConnection() != null && event.getConnection().getCondition() != null && event.getConnection().getCondition().getDescription() != null ? event.getConnection().getCondition().getDescription() : "";
+        String linkErrorDescription = event.getLink() != null && event.getLink().getCondition() != null && event.getLink().getCondition().getDescription() != null ? event.getLink().getCondition().getDescription() : "";
+        String transportErrorDescription = event.getTransport() != null && event.getTransport().getCondition() != null && event.getTransport().getCondition().getDescription() != null ? event.getTransport().getCondition().getDescription() : "";
+        
         if (!senderError.isEmpty())
         {
             // Codes_SRS_AMQPSIOTHUBCONNECTION_34_081: [If an exception can be found in the sender, this function shall return a the mapped amqp exception derived from that exception.]
@@ -1279,7 +1293,42 @@ public final class AmqpsIotHubConnection extends BaseHandler implements IotHubTr
             error = transportError;
             errorDescription = transportErrorDescription;
         }
-
+        else if (!senderErrorRemote.isEmpty())
+        {
+            // Codes_SRS_AMQPSIOTHUBCONNECTION_34_081: [If an exception can be found in the sender, this function shall return a the mapped amqp exception derived from that exception.]
+            error = senderErrorRemote;
+            errorDescription = senderErrorRemoteDescription;
+        }
+        else if (!receiverErrorRemote.isEmpty())
+        {
+            // Codes_SRS_AMQPSIOTHUBCONNECTION_34_082: [If an exception can be found in the receiver, this function shall return a the mapped amqp exception derived from that exception.]
+            error = receiverErrorRemote;
+            errorDescription = receiverErrorRemoteDescription;
+        }
+        else if (!sessionErrorRemote.isEmpty())
+        {
+            // Codes_SRS_AMQPSIOTHUBCONNECTION_34_083: [If an exception can be found in the session, this function shall return a the mapped amqp exception derived from that exception.]
+            error = sessionErrorRemote;
+            errorDescription = sessionErrorRemoteDescription;
+        }
+        else if (!connectionErrorRemote.isEmpty())
+        {
+            // Codes_SRS_AMQPSIOTHUBCONNECTION_34_084: [If an exception can be found in the connection, this function shall return a the mapped amqp exception derived from that exception.]
+            error = connectionErrorRemote;
+            errorDescription = connectionErrorRemoteDescription;
+        }
+        else if (!linkErrorRemote.isEmpty())
+        {
+            // Codes_SRS_AMQPSIOTHUBCONNECTION_34_085: [If an exception can be found in the link, this function shall return a the mapped amqp exception derived from that exception.]
+            error = linkErrorRemote;
+            errorDescription = linkErrorRemoteDescription;
+        }
+        else if (!transportErrorRemote.isEmpty())
+        {
+            // Codes_SRS_AMQPSIOTHUBCONNECTION_34_086: [If an exception can be found in the transport, this function shall return a the mapped amqp exception derived from that exception.]
+            error = transportErrorRemote;
+            errorDescription = transportErrorRemoteDescription;
+        }
 
         // Codes_SRS_AMQPSIOTHUBCONNECTION_34_080: [If no exception can be found in the sender, receiver, session, connection, link, or transport, this function shall return a generic TransportException.]
         if (!error.isEmpty())
