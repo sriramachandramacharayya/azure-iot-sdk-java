@@ -293,7 +293,6 @@ public class ProvisioningCommon extends IntegrationTest
         long startTime = System.currentTimeMillis();
         long timeoutInMillis = 180*1000; //3 minutes
         boolean deviceRegisteredSuccessfully = false;
-        Thread.sleep(10*1000);
         do
         {
             try
@@ -335,7 +334,7 @@ public class ProvisioningCommon extends IntegrationTest
             {
                 if (withRetry)
                 {
-                    if (((System.currentTimeMillis() - startTime) < timeoutInMillis))
+                    if (((System.currentTimeMillis() - startTime) > timeoutInMillis))
                     {
                         fail(CorrelationDetailsLoggingAssert.buildExceptionMessageDpsIndividualOrGroup("Timed out waiting for device to register successfully, last exception: " + Tools.getStackTraceFromThrowable(e), getHostName(provisioningServiceConnectionString), testInstance.groupId, testInstance.registrationId));
                     }
